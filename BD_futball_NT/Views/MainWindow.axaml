@@ -6,12 +6,61 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BD_futball_NT.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="BD_futball_NT">
+        Title="BD_futball_NT"
+		Background ="#F0FFF0">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+	
+	<Window.Styles>
+		<Style Selector="Button.buttons">
+			<Setter Property="FontSize" Value="20"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="VerticalAlignment" Value="Stretch"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Width" Value="190"/>
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Background" Value="#00FFFF"/>
+		</Style>
+		<Style Selector="Button.buttons:pointerover /template/ ContentPresenter">
+			<Setter Property="Background" Value="#98FB98"/>
+		</Style>
+		<Style Selector="TextBlock.textBlocks">
+			<Setter Property="FontSize" Value="25"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	</Window.Styles>
+
+	<Grid RowDefinitions="50,*,50,*,50" ColumnDefinitions="200,*">
+		<TextBlock Classes="textBlocks" Grid.Row="0" Grid.Column="0"  Text="Tables"/>
+		<StackPanel Grid.Row="1" Grid.Column="0">
+			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenPlayersTable}" Content="Player" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenMatchesTable}" Content="Matches" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenNationalTeamsTable}" Content="NationalTeams" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenTournamentsTable}" Content="Tournaments" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenStatisticsTable}" Content="Statistics" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+		</StackPanel>
+		
+		<TextBlock Classes="textBlocks" Grid.Row="2" Grid.Column="0"  Text="Requests"/>
+		<StackPanel Grid.Row="3" Grid.Column="0">
+			<ItemsControl Items="{Binding Requests}"  Name="Requests">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Name="RequestName" Text="{Binding RequestName}" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</StackPanel> 
+
+		<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenRequestMakerView}" Grid.Row="4" Grid.Column="0" Name="NewRequest" Content="Add new Request"  />
+		<UserControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="5" Content="{Binding ChosenTable}" />
+
+		
+		
+	</Grid>
 
 </Window>

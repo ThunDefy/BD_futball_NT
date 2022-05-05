@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="BD_futball_NT.Views.RequestMakerView">
+	
+	
+	<Grid RowDefinitions="100,*,*,*,*,*,*,*,*,100" ColumnDefinitions="*,*,*,*,*,*">
+		<TextBox VerticalAlignment="Center" TextAlignment="Center" FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" >Тут будет выводится запрос в текстовой форме</TextBox>
+		<Expander Grid.Row="1" Grid.Column="0" Header="Выбрать таблицу">
+				<TextBlock>Таблица 1</TextBlock>
+		</Expander>
+		<TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="40" Grid.Row="1" Grid.Column="1" >Where</TextBlock>
+		<Expander Margin="3" Grid.Row="1" Grid.Column="2" Header="Выбрать поле">
+			<TextBlock>Поле 1</TextBlock>
+		</Expander>
+		<Expander Margin="3" Grid.Row="1" Grid.Column="3" Header="Сортировка">
+			<TextBlock>По возрастанию</TextBlock>
+		</Expander>
+		<Expander Margin="3" Grid.Row="1" Grid.Column="4" Header="Группировка">
+			<TextBlock>Sum</TextBlock>
+		</Expander>
+		<TextBox Margin="3" Width="200" Height="50" VerticalAlignment="Top" Watermark="Условие отбора" HorizontalAlignment="Center" FontSize="20" Grid.Row="1" Grid.Column="5"/>
+
+		
+		<Expander Grid.Row="2" Grid.Column="0" Header="Выбрать таблицу">
+			<TextBlock>Таблица 2</TextBlock>
+		</Expander>
+		<TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="40" Grid.Row="2" Grid.Column="1" >Where</TextBlock>
+		<Expander Margin="3" Grid.Row="2" Grid.Column="2" Header="Выбрать поле">
+			<TextBlock>Поле 1</TextBlock>
+		</Expander>
+		<Expander Margin="3" Grid.Row="2" Grid.Column="3" Header="Сортировка">
+			<TextBlock>По возрастанию</TextBlock>
+		</Expander>
+		<Expander Margin="3" Grid.Row="2" Grid.Column="4" Header="Группировка">
+			<TextBlock>Sum</TextBlock>
+		</Expander>
+		<TextBox Margin="3" Width="200" Height="50" VerticalAlignment="Top" Watermark="Условие отбора" HorizontalAlignment="Center" FontSize="20" Grid.Row="2" Grid.Column="5"/>
+
+		<Button  Classes="buttons" Grid.Row="3" HorizontalAlignment="Left" Grid.Column="0" Height="50" Width="50">
+			<Image  Source="\Assets\add.ico"/>
+		</Button>
+
+		<TextBox Margin="3" Width="200" Height="50" VerticalAlignment="Top" Watermark="Название запроса" HorizontalAlignment="Center" FontSize="20" Grid.Row="10" Grid.Column="0"/>
+		<Button  Classes="buttons" VerticalAlignment="Top" Grid.Row="10" Grid.Column="1" Height="50" Width="150">
+			Сохранить
+		</Button>
+
+
+	</Grid>
+	
+	
+</UserControl>

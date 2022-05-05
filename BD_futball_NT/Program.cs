@@ -20,5 +20,6 @@ namespace BD_futball_NT
                 .UsePlatformDetect()
                 .LogToTrace()
                 .UseReactiveUI();
+
     }
 }

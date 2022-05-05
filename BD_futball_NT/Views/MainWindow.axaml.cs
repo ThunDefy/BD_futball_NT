@@ -1,4 +1,10 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
+using BD_futball_NT.Models;
+using BD_futball_NT.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace BD_futball_NT.Views
 {
@@ -8,5 +14,6 @@ namespace BD_futball_NT.Views
         {
             InitializeComponent();
         }
+
     }
 }
