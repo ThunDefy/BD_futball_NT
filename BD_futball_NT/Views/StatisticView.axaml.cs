@@ -11,6 +11,14 @@ namespace BD_futball_NT.Views
             InitializeComponent();
         }
 
+        private void DeleteExtraColumn(object control, DataGridAutoGeneratingColumnEventArgs args)
+        {
+            if (args.PropertyName == "IdTournamentNavigation" || args.PropertyName == "IdMatchNavigation" || args.PropertyName == "IdPlayerNavigation")
+            {
+                args.Cancel = true;
+            }
+        }
+
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);

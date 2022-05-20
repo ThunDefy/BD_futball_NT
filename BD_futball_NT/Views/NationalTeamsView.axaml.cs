@@ -10,6 +10,13 @@ namespace BD_futball_NT.Views
         {
             InitializeComponent();
         }
+        private void DeleteExtraColumn(object control, DataGridAutoGeneratingColumnEventArgs args)
+        {
+            if (args.PropertyName == "MatchIdNteam1Navigations" || args.PropertyName == "MatchIdNteam2Navigations" || args.PropertyName == "Players") 
+            {
+                args.Cancel = true;
+            }
+        }
 
         private void InitializeComponent()
         {

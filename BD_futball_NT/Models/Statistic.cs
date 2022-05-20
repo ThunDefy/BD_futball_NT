@@ -3,8 +3,17 @@ using System.Collections.Generic;
 
 namespace BD_futball_NT.Models
 {
+    
     public partial class Statistic
     {
+        public Statistic()
+        {
+        }
+        public Statistic(long id)
+        {
+            IdStatistic = id;
+        }
+
         public long IdStatistic { get; set; }
         public long IdPlayer { get; set; }
         public long IdTournament { get; set; }

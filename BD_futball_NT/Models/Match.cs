@@ -9,6 +9,10 @@ namespace BD_futball_NT.Models
         {
             Statistics = new HashSet<Statistic>();
         }
+        public Match(long id)
+        {
+            IdMatch = id;
+        }
 
         public long IdMatch { get; set; }
         public long IdTournament { get; set; }

@@ -10,6 +10,10 @@ namespace BD_futball_NT.Models
             Matches = new HashSet<Match>();
             Statistics = new HashSet<Statistic>();
         }
+        public Tournament(long id)
+        {
+            IdTournament = id;
+        }
 
         public long IdTournament { get; set; }
         public string TournamentName { get; set; } = null!;

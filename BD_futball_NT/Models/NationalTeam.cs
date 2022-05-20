@@ -11,6 +11,10 @@ namespace BD_futball_NT.Models
             MatchIdNteam2Navigations = new HashSet<Match>();
             Players = new HashSet<Player>();
         }
+        public NationalTeam(long id)
+        {
+            IdNteam = id;
+        }
 
         public long IdNteam { get; set; }
         public string NteamName { get; set; } = null!;

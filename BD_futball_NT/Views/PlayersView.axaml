@@ -6,7 +6,7 @@
              x:Class="BD_futball_NT.Views.PlayersView">
 	
 	<StackPanel>
-	    <DataGrid Name="Table" Items="{Binding Players}" AutoGenerateColumns="True"/>
+	    <DataGrid Name="Table" Items="{Binding Players}" AutoGeneratingColumn ="DeleteExtraColumn" AutoGenerateColumns="True" SelectedIndex="{Binding $parent[Window].DataContext.RowInd}"/>
 	</StackPanel>
 	
 </UserControl>

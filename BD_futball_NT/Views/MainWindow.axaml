@@ -35,9 +35,9 @@
 
 	</Window.Styles>
 
-	<Grid RowDefinitions="50,*,50,*,50" ColumnDefinitions="200,*">
-		<TextBlock Classes="textBlocks" Grid.Row="0" Grid.Column="0"  Text="Tables"/>
-		<StackPanel Grid.Row="1" Grid.Column="0">
+	<Grid RowDefinitions="50,*,50,*,50,50" ColumnDefinitions="100,100,*">
+		<TextBlock Classes="textBlocks" Grid.Row="0" Grid.ColumnSpan="2"  Text="Tables"/>
+		<StackPanel Grid.Row="1" Grid.ColumnSpan="2">
 			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenPlayersTable}" Content="Player" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenMatchesTable}" Content="Matches" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenNationalTeamsTable}" Content="NationalTeams" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
@@ -45,8 +45,8 @@
 			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenStatisticsTable}" Content="Statistics" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 		</StackPanel>
 		
-		<TextBlock Classes="textBlocks" Grid.Row="2" Grid.Column="0"  Text="Requests"/>
-		<StackPanel Grid.Row="3" Grid.Column="0">
+		<TextBlock Classes="textBlocks" Grid.Row="2" Grid.ColumnSpan="2"  Text="Requests"/>
+		<StackPanel Grid.Row="3" Grid.ColumnSpan="2">
 			<ItemsControl Items="{Binding Requests}"  Name="Requests">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
@@ -54,10 +54,12 @@
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
-		</StackPanel> 
+		</StackPanel>
 
-		<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenRequestMakerView}" Grid.Row="4" Grid.Column="0" Name="NewRequest" Content="Add new Request"  />
-		<UserControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="5" Content="{Binding ChosenTable}" />
+		<Button Classes="buttons" Command="{Binding DelItm}" Grid.Row="4" Grid.Column="1" Name="DelRow" Content="Delete Row"  Width="100"  FontSize="14"/>
+		<Button Classes="buttons" Command="{Binding AddItm}" Grid.Row="4" Grid.Column="0" Name="AddNewRow" Content="Add Row"  Width="100" FontSize="14"/>
+		<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenRequestMakerView}" Grid.Row="5"  Grid.ColumnSpan="2" Name="NewRequest" Content="Add new Request"  />
+		<UserControl Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding ChosenTable}" />
 
 		
 		

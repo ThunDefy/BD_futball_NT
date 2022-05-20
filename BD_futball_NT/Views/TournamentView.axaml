@@ -6,7 +6,7 @@
              x:Class="BD_futball_NT.Views.TournamentView">
 
 	<StackPanel>
-		<DataGrid Name="Table" Items="{Binding Tournaments}" AutoGenerateColumns="True"/>
+		<DataGrid Name="Table" Items="{Binding Tournaments}" AutoGenerateColumns="True" AutoGeneratingColumn ="DeleteExtraColumn" SelectedIndex="{Binding $parent[Window].DataContext.RowInd}"/>
 	</StackPanel>
 
 </UserControl>
