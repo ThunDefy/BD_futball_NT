@@ -2,54 +2,64 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="700"
+			 Width="1200" Height="700"
 			 x:Class="BD_futball_NT.Views.RequestMakerView">
-	
-	
-	<Grid RowDefinitions="100,*,*,*,*,*,*,*,*,100" ColumnDefinitions="*,*,*,*,*,*">
-		<TextBox VerticalAlignment="Center" TextAlignment="Center" FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" >Тут будет выводится запрос в текстовой форме</TextBox>
-		<Expander Grid.Row="1" Grid.Column="0" Header="Выбрать таблицу">
-				<TextBlock>Таблица 1</TextBlock>
-		</Expander>
-		<TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="40" Grid.Row="1" Grid.Column="1" >Where</TextBlock>
-		<Expander Margin="3" Grid.Row="1" Grid.Column="2" Header="Выбрать поле">
-			<TextBlock>Поле 1</TextBlock>
-		</Expander>
-		<Expander Margin="3" Grid.Row="1" Grid.Column="3" Header="Сортировка">
-			<TextBlock>По возрастанию</TextBlock>
-		</Expander>
-		<Expander Margin="3" Grid.Row="1" Grid.Column="4" Header="Группировка">
-			<TextBlock>Sum</TextBlock>
-		</Expander>
-		<TextBox Margin="3" Width="200" Height="50" VerticalAlignment="Top" Watermark="Условие отбора" HorizontalAlignment="Center" FontSize="20" Grid.Row="1" Grid.Column="5"/>
 
+	<Grid RowDefinitions="60,550,50,*" ColumnDefinitions="500,*">
+		<TextBlock Grid.Column="0" Grid.Row="0" Text="From:                                           Join:" FontSize="30" FontWeight="Bold" Margin="10,5,0,0"/>
+		<TextBlock Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0" Text="Where:" Margin="10,5,0,0" FontSize="25" FontWeight="Bold" />
 		
-		<Expander Grid.Row="2" Grid.Column="0" Header="Выбрать таблицу">
-			<TextBlock>Таблица 2</TextBlock>
-		</Expander>
-		<TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="40" Grid.Row="2" Grid.Column="1" >Where</TextBlock>
-		<Expander Margin="3" Grid.Row="2" Grid.Column="2" Header="Выбрать поле">
-			<TextBlock>Поле 1</TextBlock>
-		</Expander>
-		<Expander Margin="3" Grid.Row="2" Grid.Column="3" Header="Сортировка">
-			<TextBlock>По возрастанию</TextBlock>
-		</Expander>
-		<Expander Margin="3" Grid.Row="2" Grid.Column="4" Header="Группировка">
-			<TextBlock>Sum</TextBlock>
-		</Expander>
-		<TextBox Margin="3" Width="200" Height="50" VerticalAlignment="Top" Watermark="Условие отбора" HorizontalAlignment="Center" FontSize="20" Grid.Row="2" Grid.Column="5"/>
+		<Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1"  RowDefinitions="*,*" ColumnDefinitions="100,200,100,200,*" >
 
-		<Button  Classes="buttons" Grid.Row="3" HorizontalAlignment="Left" Grid.Column="0" Height="50" Width="50">
-			<Image  Source="\Assets\add.ico"/>
-		</Button>
+			<Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" RowDefinitions="30,*,30">
+				<TextBlock  Grid.Row="0" Text="Table:" FontSize="18" Margin="50,10,10,10"/>
+				<ListBox Grid.Row="1" Name="TableList" Items="{Binding TableName}" SelectedIndex="{Binding FromPr.TableInd}" Margin="50,10,10,10"   SelectionMode="Multiple"/>
+				<Button Classes="buttons"  Grid.Row="2" Content="Add" VerticalContentAlignment="Top"
+						HorizontalContentAlignment="Center" Height="40" FontSize="18" Command="{Binding AddFrom}"
+						 HorizontalAlignment="Center" Width="100" VerticalAlignment="Center"/>
+			</Grid>
 
-		<TextBox Margin="3" Width="200" Height="50" VerticalAlignment="Top" Watermark="Название запроса" HorizontalAlignment="Center" FontSize="20" Grid.Row="10" Grid.Column="0"/>
-		<Button  Classes="buttons" VerticalAlignment="Top" Grid.Row="10" Grid.Column="1" Height="50" Width="150">
-			Сохранить
-		</Button>
+			<Grid Grid.Column="2" Grid.Row="0" RowDefinitions="*,*,*,*,*,*,*">
+				<TextBlock  Grid.Row="0" Text="Table:" FontSize="18" Margin="50,10,10,10"/>
+				<ComboBox  Grid.Row="1" SelectedIndex="{Binding JoinPr.TableInd}" SelectionChanged="ChangeJoin" Items="{Binding TableName}" TextBlock.FontSize="15" MinWidth="180" Margin="50,0,5,10"/>
+				<TextBlock  Grid.Row="2" Text="Column1:" FontSize="18" Margin="50,10,10,10"/>
+				<ComboBox Grid.Row="3" Items="{Binding LastFromAtr}" SelectedIndex="{Binding JoinPr.AtrIndFirst}" TextBlock.FontSize="15" MinWidth="180"  Margin="50,0,5,10"/>
+				<TextBlock  Grid.Row="4" Text="Column2:" FontSize="18" Margin="50,10,10,10"/>
+				<ComboBox Grid.Row="5" Items="{Binding JoinAtr}" SelectedIndex="{Binding JoinPr.AtrIndSec}" TextBlock.FontSize="15" MinWidth="180" Margin="50,0,5,10"/>
+				<Button Classes="buttons" Grid.Row="6" Command="{Binding AddJoin}" Grid.Column="0" Grid.ColumnSpan="3" Content="Add" VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"  Height="40" FontSize="18"
+					Margin="70,0,5,10" HorizontalAlignment="Stretch" />
+			</Grid>	
 
 
+			<Grid Grid.Column="4" Grid.Row="0" RowDefinitions="0.4*,0.8*,1.2*,0.7*,0.8*" ShowGridLines="False">
+
+				<StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
+					<ComboBox Items="{Binding UsebleTablesAndReq}" SelectionChanged="ChangeWhere" SelectedIndex="{Binding WhPr.TableInd}" Height="35" Width="160" Margin="10,0,0,0"/>
+					<ComboBox Items="{Binding WhPr.WhereAtr}" SelectedIndex="{Binding WhPr.AtrInd}" Height="35" Width="160" Margin="5,0,0,0"/>
+					<ComboBox Items="{Binding WhPr.Signs}" SelectedIndex="{Binding WhPr.SignInd}" Height="35" Width="80" Margin="5,0,0,0"/>
+					<TextBox  Text="{Binding WhPr.SecOperand}" Height="35" Width="165" Margin="5,0,0,0" Focusable="True"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center">
+					<ComboBox Items="{Binding WhPr.ConectWord}" SelectedIndex="{Binding WhPr.ConnectInd}" Height="35" Width="100" Margin="10,11,0,0"/>
+					<Button Classes="buttons" Width="60" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Content="Input" VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"  FontSize="18" Height="40" Command="{Binding Input}"
+						Margin="10,1,10,4" HorizontalAlignment="Stretch"/>
+					<TextBox  Text="{Binding WhPr.Text}"   Height="60" Width="399" Focusable="False" AcceptsReturn="True" TextWrapping="Wrap"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3" Grid.RowSpan="1" VerticalAlignment="Center">
+					<TextBlock Text="Group:" FontSize="18" Margin="10,5,5,0"/>
+					<ComboBox SelectionChanged="ChangeGroup" SelectedIndex="{Binding WhPr.GroupTbInd}" Items="{Binding UsebleTables}" TextBlock.FontSize="15" MinWidth="260" Margin="3,0,0,0"></ComboBox>
+					<ComboBox SelectedIndex="{Binding WhPr.GroupInd}" Items="{Binding WhPr.GroupTb}" TextBlock.FontSize="15" MinWidth="250" Margin="5,0,0,0"></ComboBox>
+				</StackPanel>
+
+				<Button Classes="buttons" Width="550" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" Content="Add" VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center" Height="40" FontSize="18" Command="{Binding AddWhere}"
+						Margin="10,15,15,1" HorizontalAlignment="Stretch"/>
+			</Grid>
+			<TextBox VerticalAlignment="Top" Text="{Binding CurReq}" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1"  Margin="4,30,4,4" Height="50"   Focusable="False"  AcceptsReturn="True" TextWrapping="Wrap"/>
+		</Grid>
 	</Grid>
-	
-	
+
 </UserControl>

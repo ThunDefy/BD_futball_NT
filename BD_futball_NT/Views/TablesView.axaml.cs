@@ -12,9 +12,9 @@ using System;
 
 namespace BD_futball_NT.Views
 {
-    public partial class MainWindow : Window
+    public partial class TablesView : UserControl
     {
-        public MainWindow()
+        public TablesView()
         {
             InitializeComponent();
         }
@@ -23,6 +23,8 @@ namespace BD_futball_NT.Views
         {
             AvaloniaXamlLoader.Load(this);
         }
-
+       
+       
+        
     }
 }

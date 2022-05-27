@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		Width="1500" Height="700"
         x:Class="BD_futball_NT.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="BD_futball_NT"
-		Background ="#F0FFF0">
+		Background ="#F0FFF0"
+		Content="{Binding Content}">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -35,34 +37,6 @@
 
 	</Window.Styles>
 
-	<Grid RowDefinitions="50,*,50,*,50,50" ColumnDefinitions="100,100,*">
-		<TextBlock Classes="textBlocks" Grid.Row="0" Grid.ColumnSpan="2"  Text="Tables"/>
-		<StackPanel Grid.Row="1" Grid.ColumnSpan="2">
-			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenPlayersTable}" Content="Player" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenMatchesTable}" Content="Matches" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenNationalTeamsTable}" Content="NationalTeams" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenTournamentsTable}" Content="Tournaments" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-			<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenStatisticsTable}" Content="Statistics" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-		</StackPanel>
-		
-		<TextBlock Classes="textBlocks" Grid.Row="2" Grid.ColumnSpan="2"  Text="Requests"/>
-		<StackPanel Grid.Row="3" Grid.ColumnSpan="2">
-			<ItemsControl Items="{Binding Requests}"  Name="Requests">
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<TextBlock Name="RequestName" Text="{Binding RequestName}" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
-		</StackPanel>
-
-		<Button Classes="buttons" Command="{Binding DelItm}" Grid.Row="4" Grid.Column="1" Name="DelRow" Content="Delete Row"  Width="100"  FontSize="14"/>
-		<Button Classes="buttons" Command="{Binding AddItm}" Grid.Row="4" Grid.Column="0" Name="AddNewRow" Content="Add Row"  Width="100" FontSize="14"/>
-		<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenRequestMakerView}" Grid.Row="5"  Grid.ColumnSpan="2" Name="NewRequest" Content="Add new Request"  />
-		<UserControl Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding ChosenTable}" />
-
-		
-		
-	</Grid>
+	
 
 </Window>
