@@ -88,34 +88,6 @@ namespace BD_futball_NT.ViewModels
             CurrentTableIndex = -1;
         }
 
-        public void OnSave()
-        {
-            string connectionStr = "Data Source=Futball_NT.db;Mode=Write";
-
-            using (sql_con = new SQLiteConnection(connectionStr))
-            {
-                for (int i = 0; i < tables.Tables.Count; i++)
-                {
-
-                    try
-                    {
-                        SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT * FROM " + tables.Tables[i].TableName, sql_con);
-
-                        SQLiteCommandBuilder commandBuilder = new SQLiteCommandBuilder(adapter);
-                        adapter.Update(tables.Tables[i]);
-
-                    }
-                    catch (SqlException ex)
-                    {
-                        Debug.WriteLine(ex.Message);
-                    }
-
-                }
-                tables.AcceptChanges();
-            }
-        }
-
-
         private int tablesInd;
         private int rowInd;
         public int TablesInd

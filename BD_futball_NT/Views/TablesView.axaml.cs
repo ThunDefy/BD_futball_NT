@@ -86,15 +86,7 @@ namespace BD_futball_NT.Views
             ChangeTable(context.Tables.Tables[context.currentTableIndex]);
 
         }
-        public void OnSaveClick(object sender, RoutedEventArgs args)
-        {
-            var context = DataContext as TablesViewModel;
 
-            context.OnSave();
-
-            ChangeTable(context.Tables.Tables[context.currentTableIndex]);
-
-        }
         public void OnDelRowButtonClick(object sender, RoutedEventArgs args)
         {
             var context = DataContext as TablesViewModel;
