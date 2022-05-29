@@ -1,35 +1,16 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reactive;
-using Microsoft.Data.Sqlite;
-using System.IO;
 using System.Data.SQLite;
-using System;
-using System.Reactive.Linq;
-using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
 using ReactiveUI;
-using BD_futball_NT.Models;
 
 namespace BD_futball_NT.ViewModels
 {
     public class TablesViewModel : ViewModelBase
     {
-
-        private ObservableCollection<Player> players;
-        private ObservableCollection<Tournament> tournaments;
-        private ObservableCollection<NationalTeam> nationalTeams;
-        private ObservableCollection<Match> matches;
-        private ObservableCollection<Statistic> statistics;
-        private ObservableCollection<Table> tablles;
-
         ViewModelBase chosenTable;
-
-
 
         private SQLiteConnection sql_con;
         private DataSet tables;
@@ -75,28 +56,9 @@ namespace BD_futball_NT.ViewModels
             get => tables;
             private set => this.RaiseAndSetIfChanged(ref tables, value);
         }
-        //public ObservableCollection<TabModel> Tabs { get; set; }
 
         public TablesViewModel()
         {
-            tablles = new ObservableCollection<Table>();
-            var DB = new Futball_NTContext();
-
-            AddItm = ReactiveCommand.Create(() => Add());
-            DelItm = ReactiveCommand.Create(() => Del());
-
-            players = new ObservableCollection<Player>(DB.Players);
-            tournaments = new ObservableCollection<Tournament>(DB.Tournaments);
-            nationalTeams = new ObservableCollection<NationalTeam>(DB.NationalTeams);
-            matches = new ObservableCollection<Match>(DB.Matches);
-            statistics = new ObservableCollection<Statistic>(DB.Statistics);
-
-            tablles.Add(new Table("Players"));
-            tablles.Add(new Table("Matches"));
-            tablles.Add(new Table("Tournaments"));
-            tablles.Add(new Table("Statistics"));
-            tablles.Add(new Table("NationalTeams"));
-
 
             string sql = "SELECT name FROM sqlite_master WHERE type=\"table\" ORDER BY 1";
             string connectionStr = "Data Source=Futball_NT.db;Mode=ReadWrite";
@@ -125,7 +87,6 @@ namespace BD_futball_NT.ViewModels
             }
             CurrentTableIndex = -1;
         }
-
 
         public void OnSave()
         {
@@ -171,81 +132,24 @@ namespace BD_futball_NT.ViewModels
         public ReactiveCommand<Unit, int> AddItm { get; }
         public ReactiveCommand<Unit, int> DelItm { get; }
 
-        private int Add()
+        public void AddRow()
         {
-            switch (TablesInd)
-            {
-                case 0: players.Add(new Player(players.Count + 2)); break;
-                case 1: tournaments.Add(new Tournament(tournaments.Count + 1)); break;
-                case 2: nationalTeams.Add(new NationalTeam(nationalTeams.Count + 1)); break;
-                case 3: matches.Add(new Match(matches.Count + 1)); break;
-                case 4: statistics.Add(new Statistic(statistics.Count + 1)); break;
-            }
-            return 0;
+            DataRow row = tables.Tables[currentTableIndex].NewRow();
+            List<object> arr = new List<object>();
+            tables.Tables[currentTableIndex].Rows.Add(row);
         }
-        private int Del()
+        public void DeleteRow()
         {
-            switch (TablesInd)
-            {
-                case 0: players.RemoveAt(RowInd); break;
-                case 1: tournaments.RemoveAt(RowInd); break;
-                case 2: nationalTeams.RemoveAt(RowInd); break;
-                case 3: matches.RemoveAt(RowInd); break;
-                case 4: statistics.RemoveAt(RowInd); break;
+            tables.Tables[currentTableIndex].Rows[selectRow].Delete();
+        }
 
-            }
-            return 0;
-        }
         public ViewModelBase ChosenTable
         {
             get => chosenTable;
             set => this.RaiseAndSetIfChanged(ref chosenTable, value);
         }
 
-        public void OpenPlayersTable()
-        {
-            TablesInd = 0;
-            ChosenTable = new PlayersViewModel(players);
-        }
-        public void OpenMatchesTable()
-        {
-            TablesInd = 3;
-            ChosenTable = new MatchesViewModel(matches);
-        }
-        public void OpenNationalTeamsTable()
-        {
-            TablesInd = 2;
-            ChosenTable = new NationalTeamsViewModel(nationalTeams);
-        }
-        public void OpenTournamentsTable()
-        {
-            TablesInd = 1;
-            ChosenTable = new TournamentViewModel(tournaments);
-        }
-        public void OpenStatisticsTable()
-        {
-            TablesInd = 4;
-            ChosenTable = new StatisticViewModel(statistics);
-        }
-
-        public void OpenReqWind(DataSet tables)
-        {
-            var vm = new RequestMakerViewModel(Tables, StrReq);
-            Observable.Merge(vm.Send)
-                .Take(1)
-                .Subscribe(msg =>
-                {
-                    if (msg != null)
-                    {
-                        StrReq = msg;
-                    }
-
-                    CurrentTableIndex = -1;
-                }
-                );
-            ChosenTable = vm;
-        }
-
+        
         ~TablesViewModel()
         {
             sql_con.Close();

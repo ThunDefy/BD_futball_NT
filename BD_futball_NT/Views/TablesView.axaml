@@ -8,16 +8,20 @@
 			 Background ="#F0FFF0">
 	
 	<Grid RowDefinitions="50,*,50,*,50,50" ColumnDefinitions="100,100,*">
-		<TextBlock Classes="textBlocks" Grid.Row="0" Grid.ColumnSpan="2"  Text="Tables"/>
+		<TextBlock Classes="textBlocks" Grid.Row="0" Grid.ColumnSpan="2" FontWeight="Heavy" Text="Tables"/>
 		<StackPanel Grid.Row="1" Grid.ColumnSpan="2">
-			<Button Classes="buttons" Command="{Binding OpenPlayersTable}" Content="Player" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-			<Button Classes="buttons" Command="{Binding OpenMatchesTable}" Content="Matches" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-			<Button Classes="buttons" Command="{Binding OpenNationalTeamsTable}" Content="NationalTeams" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-			<Button Classes="buttons" Command="{Binding OpenTournamentsTable}" Content="Tournaments" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-			<Button Classes="buttons" Command="{Binding OpenStatisticsTable}" Content="Statistics" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+			<ScrollViewer VerticalScrollBarVisibility="Auto" >
+				<ListBox Background="#F0FFF0" Items="{Binding Tables.Tables}" SelectionChanged="OnSelect" SelectedIndex="{Binding CurrentTableIndex}">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<TextBlock FontSize="20" HorizontalAlignment="Center"  Text="{Binding TableName}"/>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</ScrollViewer>
 		</StackPanel>
 
-		<TextBlock Classes="textBlocks" Grid.Row="2" Grid.ColumnSpan="2"  Text="Requests"/>
+		<TextBlock Classes="textBlocks" Grid.Row="2" Grid.ColumnSpan="2" FontWeight="Heavy" Text="Requests"/>
 		<StackPanel Grid.Row="3" Grid.ColumnSpan="2">
 			<ItemsControl Items="{Binding Requests}"  Name="Requests">
 				<ItemsControl.ItemTemplate>
@@ -27,12 +31,25 @@
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
 		</StackPanel>
-		<Button Classes="buttons" Command="{Binding DelItm}" Grid.Row="4" Grid.Column="1" Name="DelRow" Content="Delete Row"  Width="100"  FontSize="14"/>
-		<Button Classes="buttons" Command="{Binding AddItm}" Grid.Row="4" Grid.Column="0" Name="AddNewRow" Content="Add Row"  Width="100" FontSize="14"/>
-		<Button Classes="buttons" Command="{Binding OpenReqWind}" Grid.Row="5"  Grid.ColumnSpan="2" Name="NewRequest" Content="Add new Request"  />
+		<Button Classes="buttons"  IsEnabled="{Binding IsTableChosen}" Grid.Row="4" Grid.Column="1" Click="OnDelRowButtonClick" Name="DelRow" Content="Delete Row"  Width="100"  FontSize="14"/>
+		<Button Classes="buttons" IsEnabled="{Binding IsTableChosen}" Click="OnAddRowButtonClick" Grid.Row="4" Grid.Column="0" Name="AddNewRow" Content="Add Row"  Width="100" FontSize="14"/>
+		<Button Classes="buttons" Command="{Binding $parent[Window].DataContext.OpenReqWind}" Grid.Row="5"  Grid.ColumnSpan="2" Name="NewRequest" Content="Add new Request"  />
+
+		
 
 		<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Column="2" Grid.Row="0" Grid.RowSpan="5">
-			<UserControl Grid.Row="0" Grid.Column="2"  Grid.RowSpan="5" Content="{Binding ChosenTable}" />
+			<DataGrid
+			IsEnabled="{Binding IsTableChosen}"
+			Items="{Binding DtView}"
+			Grid.RowSpan="2"
+			SelectedIndex="{Binding SelectRow}"
+			Grid.Column="1" Grid.Row="0"
+	        x:Name="dGrid"
+	        AutoGenerateColumns="False"
+	        VerticalScrollBarVisibility="Visible"
+	        IsReadOnly="False"
+	        >
+			</DataGrid>
 		</ScrollViewer>
 
 

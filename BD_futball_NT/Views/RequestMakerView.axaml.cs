@@ -1,6 +1,3 @@
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using BD_futball_NT.ViewModels;
@@ -31,8 +28,6 @@ namespace BD_futball_NT.Views
                     context.WhPr.WhereAtr = new ObservableCollection<string>(context.atributes[combo.SelectedIndex - context.ReqNames.Count]);
                 else context.WhPr.WhereAtr = new ObservableCollection<string>(context.atributes[0]);
             }
-
-           
         }
 
         private void ChangeGroup(object sender, SelectionChangedEventArgs e)
@@ -41,7 +36,6 @@ namespace BD_futball_NT.Views
             var context = this.DataContext as RequestMakerViewModel;
             if (context != null)
                 context.WhPr.GroupTb = new ObservableCollection<string>(context.atributes[combo.SelectedIndex]);
-            
         }
 
         private void ChangeJoin(object sender, SelectionChangedEventArgs e)

@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
 namespace BD_futball_NT.Models
 {
-    public class JoinProperty : INotifyPropertyChanged
+    public class FromReq : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
@@ -17,27 +11,16 @@ namespace BD_futball_NT.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public JoinProperty()
+        public FromReq()
         {
             TableInd = 0;
         }
 
-        private int atrIndFirst, atrIndSec, tableInd;
+        private int tableInd;
         public int TableInd
         {
             get => tableInd;
             set { tableInd = value; NotifyPropertyChanged(); }
         }
-        public int AtrIndFirst
-        {
-            get => atrIndFirst;
-            set { atrIndFirst = value; NotifyPropertyChanged(); }
-        }
-        public int AtrIndSec
-        {
-            get => atrIndSec;
-            set { atrIndSec = value; NotifyPropertyChanged(); }
-        }
-
     }
 }

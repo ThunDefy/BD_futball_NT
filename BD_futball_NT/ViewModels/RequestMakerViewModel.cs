@@ -1,28 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
 using BD_futball_NT.Models;
 using ReactiveUI;
 using System.Reactive;
 using System.Data;
 using System.Data.SQLite;
-using System.Threading.Tasks;
-using Microsoft.Data.Sqlite;
-using System.IO;
-using System;
-using System.Reactive.Linq;
-using System.Data.SqlClient;
-using System.Diagnostics;
+
 
 namespace BD_futball_NT.ViewModels
 {
 
     public class RequestMakerViewModel : ViewModelBase
     {
-       
-
+      
         public RequestMakerViewModel(DataSet tableSet, List<string> strRequests)
         {
             
@@ -31,7 +21,7 @@ namespace BD_futball_NT.ViewModels
             for (int i = 0; i < strRequests.Count; i++)
                 ReqNames.Add("Request " + i.ToString());
             UsebleTablesAndReq = new ObservableCollection<string> { "" };
-            //UsebleTablesAndReq.Union(ReqNames);
+
             foreach (var it in ReqNames)
                 UsebleTablesAndReq.Add(it);
             Agreg = new ObservableCollection<string> { "", "AVG", "SUM", "MIN", "MAX", "COUNT" };
@@ -40,7 +30,6 @@ namespace BD_futball_NT.ViewModels
             Send = ReactiveCommand.Create(() => StrReq);
             Cancel = ReactiveCommand.Create(() => { });
 
-            //SelectInd = 0;
             TableName = new ObservableCollection<string> { "" };
             atributes = new List<List<string>> { new List<string> { "" } };
             DataTable table;
@@ -57,10 +46,9 @@ namespace BD_futball_NT.ViewModels
 
             UsebleTables = new ObservableCollection<string> { "" };
 
-            //SelPr = new SelectProperty();
-            JoinPr = new JoinProperty();
-            FromPr = new FromProperty();
-            WhPr = new WhereProperty();
+            JoinPr = new JoinReq();
+            FromPr = new FromReq();
+            WhPr = new WhereReq();
             JoinEn = WhereEn = true;
             SelectEn = true;
             whereStr = "";
@@ -186,32 +174,25 @@ namespace BD_futball_NT.ViewModels
             get => lastFromAtr;
             set => this.RaiseAndSetIfChanged(ref lastFromAtr, value);
         }
-/*
-        public SelectProperty selPr;
-        public SelectProperty SelPr
-        {
-            get => selPr;
-            set => this.RaiseAndSetIfChanged(ref selPr, value);
-        }*/
-        public JoinProperty joinPr;
-        public JoinProperty JoinPr
+
+        public JoinReq joinPr;
+        public JoinReq JoinPr
         {
             get => joinPr;
             set => this.RaiseAndSetIfChanged(ref joinPr, value);
         }
-        public FromProperty fromPr;
-        public FromProperty FromPr
+        public FromReq fromPr;
+        public FromReq FromPr
         {
             get => fromPr;
             set => this.RaiseAndSetIfChanged(ref fromPr, value);
         }
-        public WhereProperty whPr;
-        public WhereProperty WhPr
+        public WhereReq whPr;
+        public WhereReq WhPr
         {
             get => whPr;
             set => this.RaiseAndSetIfChanged(ref whPr, value);
         }
-        ///////////////////////////////////////
 
         bool selectEn, joinEn, whereEn;
         public bool SelectEn
@@ -229,15 +210,10 @@ namespace BD_futball_NT.ViewModels
             get => whereEn;
             set { this.RaiseAndSetIfChanged(ref whereEn, value); }
         }
-        ///////////////////////////////////////
+
         public ObservableCollection<string> TableName { get; set; }
         public List<List<string>> atributes;
 
         public ObservableCollection<string> Agreg { get; set; }
-
-
-
-       
-
     }
 }

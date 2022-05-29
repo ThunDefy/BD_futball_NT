@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BD_futball_NT.Models
 {
-    public class WhereProperty : INotifyPropertyChanged
+    public class WhereReq : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
@@ -17,7 +13,7 @@ namespace BD_futball_NT.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public WhereProperty()
+        public WhereReq()
         {
             TableInd = 0;
             Signs = new ObservableCollection<string> { "", ">", "<", "=" };

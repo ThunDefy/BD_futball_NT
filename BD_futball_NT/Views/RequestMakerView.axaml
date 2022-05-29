@@ -57,8 +57,13 @@
 				<Button Classes="buttons" Width="550" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" Content="Add" VerticalContentAlignment="Center"
 						HorizontalContentAlignment="Center" Height="40" FontSize="18" Command="{Binding AddWhere}"
 						Margin="10,15,15,1" HorizontalAlignment="Stretch"/>
+				
 			</Grid>
 			<TextBox VerticalAlignment="Top" Text="{Binding CurReq}" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1"  Margin="4,30,4,4" Height="50"   Focusable="False"  AcceptsReturn="True" TextWrapping="Wrap"/>
+			<Button Classes="buttons" Margin="1" Grid.Row="1" Grid.Column="0" Content="Exit" VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center" Height="48" FontSize="18"
+						 HorizontalAlignment="Left" VerticalAlignment="Bottom"
+					Command="{Binding Send}"/>
 		</Grid>
 	</Grid>
 
